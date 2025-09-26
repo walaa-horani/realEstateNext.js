@@ -1,16 +1,17 @@
 "use client"
+
 import { Button } from '@/components/ui/button'
 import { api } from '@/convex/_generated/api'
 import { useQuery } from 'convex/react'
 import { ArrowBigRight } from 'lucide-react'
-import {PropertyFilters as Filters} from "../types"
+import { PropertyFilters as Filters } from "../types"
 import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Suspense } from 'react'
 import PropertyCard from '../_components/PropertyCard'
 import PropertyFilters from '../_components/PropertyFilters'
 import { useSearchParams } from 'next/navigation'
 
-function page() {
+function PropertiesPageContent() {
   const [filters, setFilters] = useState<Filters>({})
   const properties = useQuery(api.properties.getProperties, filters)
   
@@ -151,7 +152,7 @@ function page() {
                     Showing {properties.length} {properties.length === 1 ? 'property' : 'properties'}
                   </div>
                   
-                  {/* Sort Options - يمكن إضافتها لاحقاً */}
+                  {/* Sort Options */}
                   <div className='hidden sm:flex items-center gap-2 text-sm text-gray-600'>
                     <span>Sort by:</span>
                     <select className='border border-gray-300 rounded-md px-3 py-1 text-sm'>
@@ -189,4 +190,10 @@ function page() {
   )
 }
 
-export default page
+export default function Page() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <PropertiesPageContent />
+    </Suspense>
+  )
+}

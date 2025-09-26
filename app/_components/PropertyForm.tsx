@@ -15,7 +15,7 @@ interface PropertyFormProps{
   propertyId?: string;
 }
 
-function PropertyForm({initialData, isEditing = false, propertyId}: dPropertyFormProps) {
+function PropertyForm({initialData, isEditing = false, propertyId}: PropertyFormProps) {
 
       const [isUploading, setIsUploading] = useState(false);
 

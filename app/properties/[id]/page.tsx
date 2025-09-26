@@ -16,7 +16,9 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import ScheduleViewing from '@/app/_components/ScheduleViewing';
-function PropertyDetailPage({ params }: {params: { id: string } }) {
+
+
+function PropertyDetailPage({ params }: { params: any }) {
      const [selectedImageIndex, setSelectedImageIndex] = useState(0);
     const router = useRouter();
     const property = useQuery(api.properties.getProperty,{id: params.id as any } )
@@ -195,11 +197,12 @@ function PropertyDetailPage({ params }: {params: { id: string } }) {
             </Dialog>
               
 
-              <ScheduleViewing property= {{
-
-                 _id: property?._id,
-                  title: property?.title
-              }}/>
+                {property?._id && (
+              <ScheduleViewing property={{
+                _id: property._id,
+                title: property.title
+              }} />
+            )}
                 <Button className='w-[200px]'>Save Property</Button>
             </div>
            </div>

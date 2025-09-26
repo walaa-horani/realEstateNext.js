@@ -14,18 +14,22 @@ import {  Clock, Key } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
+import type { Id } from "@/convex/_generated/dataModel"
 
 import { format } from 'date-fns'
 import { Calendar } from '@/components/ui/calendar'
 import { Label } from '@/components/ui/label'
 
+
+
 interface ScheduleViewingProps {
-property:{
-_id: string
-    title: string
+  property: {
+    _id: Id<"properties">;
+    title: string;
+  };
 }
-}
-function ScheduleViewing({property}) {
+
+function ScheduleViewing({ property }: ScheduleViewingProps) {
     const [date, setDate] = React.useState<Date | undefined>(new Date())
 
     const {user} = useUser()
